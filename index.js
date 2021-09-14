@@ -43,7 +43,7 @@ const puntosEquipo = (registro, equipo) => {
     }
   }
   });
-return puntosPorJugador;
+return  puntosPorJugador;
 }
 
 const puntosEquipoA = puntosEquipo(partido, equipoA);
@@ -54,58 +54,68 @@ console.log( puntosEquipoB);
 const puntosB = () => {};
 
 const resultadoFinal = (puntosEquipoA, puntosEquipoB) => { 
-let TotalA=0;  
-let TotalB=0; 
+  const resultadoFinal={
+    TotalA:0,
+    TotalB:0
+  };
+  let grupoA= Object.entries(puntosEquipoA)
+  let grupoB= Object.entries(puntosEquipoB)
 
-let grupoA= Object.entries(puntosEquipoA)
-let grupoB= Object.entries(puntosEquipoB)
+  grupoA.forEach(Ga =>{
+    resultadoFinal.TotalA+=Ga[1]
+    });
 
-grupoA.forEach(Ga =>{
-  TotalA+=Ga[1]
-});
-
-grupoB.forEach(Gb =>{
-  TotalB+=Gb[1]
-});
-console.log("el partido termino Grupo A " + TotalA + " -  " + TotalB+" Grupo B")
+  grupoB.forEach(Gb =>{
+    resultadoFinal.TotalB+=Gb[1]
+  });
+  console.log("el partido termino Grupo A " + resultadoFinal.TotalA + " -  " + resultadoFinal.TotalB+" Grupo B")
+  return JSON.stringify(resultadoFinal)
 };
 const goleador = (puntosEquipoA, puntosEquipoB) => {
-let grupoA= Object.entries(puntosEquipoA)
-let grupoB= Object.entries(puntosEquipoB)
+  let grupoA= Object.entries(puntosEquipoA)
+  let grupoB= Object.entries(puntosEquipoB)
 
-let goleador="";  
-let puntosgoleador=0; 
-
-grupoA.forEach(Ga =>{
-  if(Ga[1]>puntosgoleador){
-    puntosgoleador = Ga[1]
-    goleador= Ga[0]
+  const goleador={
+    nombre:"",
+    puntos:0
   }
-});
 
-grupoB.forEach(Gb =>{
-  if(Gb[1]>puntosgoleador){
-    puntosgoleador = Gb[1]
-    goleador= Gb[0]
-  }
-});
-console.log("el Goleador es " + goleador + " con " + puntosgoleador +" puntos")
+  grupoA.forEach(Ga =>{
+    if(Ga[1]> goleador.puntos){
+      goleador.puntos = Ga[1]
+      goleador.nombre= Ga[0]
+    }
+  });
+
+  grupoB.forEach(Gb =>{
+    if(Gb[1]> goleador.puntos){
+      goleador.puntos = Gb[1]
+      goleador.nombre= Gb[0]
+    }
+  });
+  console.log("el Goleador es " + goleador.nombre + " con " + goleador.puntos +" puntos")
+
+  return JSON.stringify(goleador)
 };
 const distribucionDePuntaje = (registro) => {
-  let puntosTry=0
-  let puntosConversion=0
+  const distribucionXtipo={
+    puntosTry:0,
+    puntosConversion:0
+  }
 
   registro.forEach(element => {
     let e = element.split(",")
     if(e[1]==="TRY"){
-      puntosTry+=5
+      distribucionXtipo.puntosTry+=5
     }else{
-      puntosConversion+=2
+      distribucionXtipo.puntosConversion+=2
     }
   });
   console.log("la division de anotaciones por tipo:")
-  console.log(" TRY: " + puntosTry )
-  console.log(" CONVERSION:  " + puntosConversion  )
+  console.log(" TRY: " + distribucionXtipo.puntosTry )
+  console.log(" CONVERSION:  " + distribucionXtipo.puntosConversion  )
+
+  return JSON.stringify(distribucionXtipo)
 };
 
 resultadoFinal(puntosEquipoA, puntosEquipoB)
