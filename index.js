@@ -68,7 +68,7 @@ const resultadoFinal = (puntosEquipoA, puntosEquipoB) => {
   grupoB.forEach(Gb =>{
     resultadoFinal.TotalB+=Gb[1]
   });
-  console.log("el partido termino Grupo A " + resultadoFinal.TotalA + " -  " + resultadoFinal.TotalB+" Grupo B")
+  //console.log("el partido termino Grupo A " + resultadoFinal.TotalA + " -  " + resultadoFinal.TotalB+" Grupo B")
   return JSON.stringify(resultadoFinal)
 };
 const goleador = (puntosEquipoA, puntosEquipoB) => {
@@ -93,7 +93,7 @@ const goleador = (puntosEquipoA, puntosEquipoB) => {
       goleador.nombre= Gb[0]
     }
   });
-  console.log("el Goleador es " + goleador.nombre + " con " + goleador.puntos +" puntos")
+ // console.log("el Goleador es " + goleador.nombre + " con " + goleador.puntos +" puntos")
 
   return JSON.stringify(goleador)
 };
@@ -111,16 +111,16 @@ const distribucionDePuntaje = (registro) => {
       distribucionXtipo.puntosConversion+=2
     }
   });
-  console.log("la division de anotaciones por tipo:")
+ /* console.log("la division de anotaciones por tipo:")
   console.log(" TRY: " + distribucionXtipo.puntosTry )
-  console.log(" CONVERSION:  " + distribucionXtipo.puntosConversion  )
+  console.log(" CONVERSION:  " + distribucionXtipo.puntosConversion  )*/
 
   return JSON.stringify(distribucionXtipo)
 };
 
-resultadoFinal(puntosEquipoA, puntosEquipoB)
-goleador(puntosEquipoA, puntosEquipoB)
-distribucionDePuntaje(partido)
+console.log(resultadoFinal(puntosEquipoA, puntosEquipoB))
+console.log(goleador(puntosEquipoA, puntosEquipoB))
+console.log(distribucionDePuntaje(partido))
 
 
 
